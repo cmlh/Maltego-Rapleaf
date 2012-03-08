@@ -1,0 +1,3 @@
+=head1 README
+
+This is a mirror of https://github.com/Rapleaf/Personalization-Dev-Kits/tree/master/perl
