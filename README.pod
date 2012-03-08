@@ -1,0 +1,5 @@
+=head1 README
+
+This http://www.paterva.com/web5/documentation/localtransforms.php returns the "Location" and "Gender" (Basic) Fields from https://www.rapleaf.com/developers.
+
+Please refer to the https://github.com/cmlh/Maltego-Rapleaf/wiki for further information.
