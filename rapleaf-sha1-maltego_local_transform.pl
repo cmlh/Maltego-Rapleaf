@@ -6,16 +6,21 @@ use LWP::UserAgent;
 use JSON;
 use Digest::SHA1;
 use URI::Escape;
+# use Smart::Comments;
 
 # #CONFIGURATION $API_KEY
 $API_KEY = 'INSERT';              # Set your API key here
 $ua      = LWP::UserAgent->new;
-$ua->timeout(2);
+# $ua->timeout(2);
 $ua->agent("RapleafApi/Perl/1.1");
 
 my $maltego_selected_entity_value = $ARGV[0];
 
 my $response = query_by_sha1($maltego_selected_entity_value);
+
+# "###" is for "Smart::Comments CPAN Module
+### \$response->{location} is :$response->{location}
+### \$response->{gender} is :$response->{gender}
 
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 print("<MaltegoMessage>\n");
@@ -69,7 +74,7 @@ sub __get_json_response {
     # an HTTP response code other than 200 is sent back
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
-    $json_response->is_success
+     $json_response->is_success
       or die 'Error Code: '
       . $json_response->status_line . "\n"
       . 'Error Body: '
