@@ -29,26 +29,30 @@ print("<UIMessages>\n");
 print(
 "		<UIMessage MessageType=\"Inform\">To Rapleaf (Basic) - Local Transform v$VERSION</UIMessage>\n"
 );
-print("</UIMessages>\n");
+
 
 # http://ctas.paterva.com/view/Specification#Entity_definition
-print("\t<Entities>\n");
-print(
-"\t\t<Entity Type=\"maltego.Location\"><Value>$response->{location}</Value></Entity>\n"
-);
+if ($response->{location} eq undef) {
+	print(
+	"		<UIMessage MessageType=\"PartialError\">No Rapleaf entry for $maltego_selected_entity_value</UIMessage>\n");
+	print("</UIMessages>\n");
+	print("\t<Entities>\n");
+	print("\t</Entities>\n");
+} else { 
+	print("</UIMessages>\n");
+	print("\t<Entities>\n");
+	print("\t\t<Entity Type=\"maltego.Location\"><Value>$response->{location}</Value></Entity>\n");
+	if ( $response->{gender} eq "Male" ) {
+    print(
+	"\t\t<Entity Type=\"maltego.Male\"><Value>$response->{gender}</Value></Entity>\n"
+    	);
+	} else {
+ 		print(
+	"\t\t<Entity Type=\"maltego.Female\"><Value>$response->{gender}</Value></Entity>\n");
+	}
+	print("\t</Entities>\n");
+}
 
-# TODO Return no Maltego Entities if Rapleaf has no corresponding information.
-if ( $response->{gender} eq "Male" ) {
-    print(
-"\t\t<Entity Type=\"maltego.Male\"><Value>$response->{gender}</Value></Entity>\n"
-    );
-}
-else {
-    print(
-"\t\t<Entity Type=\"maltego.Female\"><Value>$response->{gender}</Value></Entity>\n"
-    );
-}
-print("\t</Entities>\n");
 
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 print("</MaltegoTransformResponseMessage>\n");
