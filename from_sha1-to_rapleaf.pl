@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#/usr/bin/env perl
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
@@ -8,9 +8,12 @@ use Digest::SHA1;
 use URI::Escape;
 # use Smart::Comments;
 
+my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+
 # #CONFIGURATION $API_KEY
-$API_KEY = 'INSERT';              # Set your API key here
+$API_KEY = 'INSERT';    # Set your API key here
 $ua      = LWP::UserAgent->new;
+
 # $ua->timeout(2);
 $ua->agent("RapleafApi/Perl/1.1");
 
@@ -30,29 +33,33 @@ print(
 "		<UIMessage MessageType=\"Inform\">To Rapleaf (Basic) - Local Transform v$VERSION</UIMessage>\n"
 );
 
-
 # http://ctas.paterva.com/view/Specification#Entity_definition
-if ($response->{location} eq undef) {
-	print(
-	"		<UIMessage MessageType=\"PartialError\">No Rapleaf entry for $maltego_selected_entity_value</UIMessage>\n");
-	print("</UIMessages>\n");
-	print("\t<Entities>\n");
-	print("\t</Entities>\n");
-} else { 
-	print("</UIMessages>\n");
-	print("\t<Entities>\n");
-	print("\t\t<Entity Type=\"maltego.Location\"><Value>$response->{location}</Value></Entity>\n");
-	if ( $response->{gender} eq "Male" ) {
+if ( $response->{location} eq undef ) {
     print(
-	"\t\t<Entity Type=\"maltego.Male\"><Value>$response->{gender}</Value></Entity>\n"
-    	);
-	} else {
- 		print(
-	"\t\t<Entity Type=\"maltego.Female\"><Value>$response->{gender}</Value></Entity>\n");
-	}
-	print("\t</Entities>\n");
+"		<UIMessage MessageType=\"PartialError\">No Rapleaf entry for $maltego_selected_entity_value</UIMessage>\n"
+    );
+    print("</UIMessages>\n");
+    print("\t<Entities>\n");
+    print("\t</Entities>\n");
 }
-
+else {
+    print("</UIMessages>\n");
+    print("\t<Entities>\n");
+    print(
+"\t\t<Entity Type=\"maltego.Location\"><Value>$response->{location}</Value></Entity>\n"
+    );
+    if ( $response->{gender} eq "Male" ) {
+        print(
+"\t\t<Entity Type=\"maltego.Male\"><Value>$response->{gender}</Value></Entity>\n"
+        );
+    }
+    else {
+        print(
+"\t\t<Entity Type=\"maltego.Female\"><Value>$response->{gender}</Value></Entity>\n"
+        );
+    }
+    print("\t</Entities>\n");
+}
 
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 print("</MaltegoTransformResponseMessage>\n");
@@ -78,7 +85,7 @@ sub __get_json_response {
     # an HTTP response code other than 200 is sent back
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
-     $json_response->is_success
+    $json_response->is_success
       or die 'Error Code: '
       . $json_response->status_line . "\n"
       . 'Error Body: '
