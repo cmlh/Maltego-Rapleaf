@@ -6,13 +6,17 @@ use LWP::UserAgent;
 use JSON;
 use Digest::SHA1;
 use URI::Escape;
+use Config::Std;
 # use Smart::Comments;
 
-my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.0.2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
-# #CONFIGURATION $API_KEY
-$API_KEY = 'INSERT';    # Set your API key here
-$ua      = LWP::UserAgent->new;
+# CONFIGURATION
+# REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
+read_config './etc/Personalization_API.conf' => my %config;
+my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
+
+$ua = LWP::UserAgent->new;
 
 # $ua->timeout(2);
 $ua->agent("RapleafApi/Perl/1.1");

@@ -13,7 +13,7 @@ my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://ww
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
 read_config './etc/Personalization_API.conf' => my %config;
-my $API_KEY = $config{'PersonalizationAPI'}{'API_Key'};
+my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
 
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
