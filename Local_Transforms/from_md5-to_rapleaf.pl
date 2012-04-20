@@ -1,4 +1,4 @@
-#!/Users/cmlh/perl5/perlbrew/perls/perl-5.14.2/bin/perl
+#!/usr/bin/env perl
 #/usr/bin/env perl
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
