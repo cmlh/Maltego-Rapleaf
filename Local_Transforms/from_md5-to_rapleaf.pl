@@ -1,19 +1,24 @@
-#!/Users/cmlh/perl5/perlbrew/perls/perl-5.14.2/bin/perl
-#/usr/bin/env perl
+#!/usr/bin/env perl
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
-
+use Config::Std;
 # use Smart::Comments;
 
-my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.0.2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
-# #CONFIGURATION $API_KEY
-$API_KEY = 'INSERT';              # Set your API key here
-$ua      = LWP::UserAgent->new;
+# CONFIGURATION
+# REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
+read_config './etc/Personalization_API.conf' => my %config;
+my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
+
+# "###" is for "Smart::Comments CPAN Module
+### \$API_KEY is :$API_KEY
+
+$ua = LWP::UserAgent->new;
 
 # $ua->timeout(2);
 $ua->agent("RapleafApi/Perl/1.1");
@@ -76,6 +81,8 @@ sub query_by_md5 {
       . $API_KEY
       . '&md5_email='
       . uri_escape($md5_email);
+    # "###" is for "Smart::Comments CPAN Module
+	### \$url is :$url
     __get_json_response($url);
 }
 
