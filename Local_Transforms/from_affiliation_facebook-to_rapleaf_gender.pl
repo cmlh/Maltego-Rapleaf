@@ -1,14 +1,16 @@
 #!/usr/bin/env perl
+# The above shebang is for "perlbrew", otherwise use /usr/bin/perl
 #
-# Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
+# Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# TODO HTTP::Tiny
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
 # use Smart::Comments;
 
-my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -134,6 +136,8 @@ sub __get_json_response {
 
 from_affiliation_facebook-to_rapleaf_gender.pl - "To Rapleaf Gender Maltego Local Transform"
 
+Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
+
 =head1 VERSION
 
 This documentation refers to "To Rapleaf Gender Maltego Local Transform" Alpha $VERSION
@@ -173,6 +177,10 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 https://www.rapleaf.com/developers/api_access
 
 =head1 COREQUISITES
+
+=head1 MALTEGO
+
+v3.2.1 "Radium"
 
 =head1 OSNAMES
 
