@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl
 # The above shebang is for "perlbrew", otherwise use /usr/bin/perl
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
@@ -172,13 +172,15 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 
 =head1 DEPENDENCIES
 
-=head1 PREREQUISITES
+=head2 CPAN Modules
+
+LWP::UserAgent
+
+=head2 Web Services API
 
 https://www.rapleaf.com/developers/api_access
 
-=head1 COREQUISITES
-
-=head1 MALTEGO
+=head2 MALTEGO
 
 v3.2.1 "Radium"
 
