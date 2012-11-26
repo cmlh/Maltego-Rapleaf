@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # The above shebang is for "perlbrew", otherwise use /usr/bin/perl
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
@@ -175,6 +175,8 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 =head2 CPAN Modules
 
 LWP::UserAgent
+JSON
+Config::Std
 
 =head2 Web Services API
 
