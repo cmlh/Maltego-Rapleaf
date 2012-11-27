@@ -1,9 +1,10 @@
 #!/usr/bin/env perl
-# The above shebang is for "perlbrew", otherwise use /usr/bin/perl
+# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update "use lib '[Insert CPAN Module Path]'""
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
 # TODO HTTP::Tiny
+# use lib '[Insert CPAN Module Path]'
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
@@ -36,7 +37,7 @@ my @maltego_additional_field_values =
   split( '#', $maltego_additional_field_values );
 
 # TODO If UID field is empty, then extract UID from the "Profile URL" field
-my $affilation_facebook_name = $maltego_additional_field_values[2];
+my $affilation_facebook_name = $maltego_additional_field_values[0];
 
 # "###" is for Smart::Comments CPAN Module
 ### \$affilation_facebook_name is: $affilation_facebook_name;
@@ -177,6 +178,7 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 LWP::UserAgent
 JSON
 Config::Std
+Smart::Comments
 
 =head2 Web Services API
 
