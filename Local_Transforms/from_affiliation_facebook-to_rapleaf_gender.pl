@@ -1,14 +1,17 @@
 #!/usr/bin/env perl
+# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update "use lib '[Insert CPAN Module Path]'""
 #
-# Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
+# Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# TODO HTTP::Tiny
+# use lib '[Insert CPAN Module Path]'
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
 # use Smart::Comments;
 
-my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -34,7 +37,7 @@ my @maltego_additional_field_values =
   split( '#', $maltego_additional_field_values );
 
 # TODO If UID field is empty, then extract UID from the "Profile URL" field
-my $affilation_facebook_name = $maltego_additional_field_values[2];
+my $affilation_facebook_name = $maltego_additional_field_values[0];
 
 # "###" is for Smart::Comments CPAN Module
 ### \$affilation_facebook_name is: $affilation_facebook_name;
@@ -134,6 +137,8 @@ sub __get_json_response {
 
 from_affiliation_facebook-to_rapleaf_gender.pl - "To Rapleaf Gender Maltego Local Transform"
 
+Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
+
 =head1 VERSION
 
 This documentation refers to "To Rapleaf Gender Maltego Local Transform" Alpha $VERSION
@@ -168,11 +173,20 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 
 =head1 DEPENDENCIES
 
-=head1 PREREQUISITES
+=head2 CPAN Modules
+
+LWP::UserAgent
+JSON
+Config::Std
+Smart::Comments
+
+=head2 Web Services API
 
 https://www.rapleaf.com/developers/api_access
 
-=head1 COREQUISITES
+=head2 MALTEGO
+
+v3.2.1 "Radium"
 
 =head1 OSNAMES
 
