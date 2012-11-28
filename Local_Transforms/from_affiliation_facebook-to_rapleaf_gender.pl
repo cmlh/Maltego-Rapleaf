@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update "use lib '[Insert CPAN Module Path]'""
+# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update "use lib '[Insert CPAN Module Path]'"
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
@@ -135,13 +135,13 @@ sub __get_json_response {
 
 =head1 NAME
 
-from_affiliation_facebook-to_rapleaf_gender.pl - "To Rapleaf Gender Maltego Local Transform"
+from_affiliation_facebook-to_rapleaf_gender.pl - "To Rapleaf Gender - Maltego Local Transform"
 
 Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
 =head1 VERSION
 
-This documentation refers to "To Rapleaf Gender Maltego Local Transform" Alpha $VERSION
+This documentation refers to "To Rapleaf Gender - Maltego Local Transform" Alpha $VERSION
 
 =head1 CONFIGURATION
 
@@ -180,9 +180,11 @@ JSON
 Config::Std
 Smart::Comments
 
-=head2 Web Services API
+=head2 Rapleaf API Key
 
-https://www.rapleaf.com/developers/api_access
+https://dashboard.rapleaf.com/api_signup
+
+https://github.com/cmlh/Maltego-Rapleaf/wiki/Overview-of-Rapleaf-APIs
 
 =head2 MALTEGO
 
