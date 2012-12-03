@@ -3,12 +3,16 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# Perl v5.8 is the minimum required for 'use autodie'
+use 5.008; use v5.8;
 # use lib '[Insert CPAN Module Path]'
 # TODO HTTP::Tiny
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
+# TODO use autodie qw(:all);
+use autodie;
 # use Smart::Comments;
 
 my $VERSION = "0.2_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
