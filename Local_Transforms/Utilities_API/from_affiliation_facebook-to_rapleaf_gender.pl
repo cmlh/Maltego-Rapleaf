@@ -3,8 +3,8 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
-# TODO HTTP::Tiny
 # use lib '[Insert CPAN Module Path]'
+# TODO HTTP::Tiny
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
