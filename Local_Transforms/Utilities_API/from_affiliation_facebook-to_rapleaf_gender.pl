@@ -1,13 +1,12 @@
 #!/usr/bin/env perl
-# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update "use lib '[Insert CPAN Module Path]'"
+# The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update the "use lib '[Insert CPAN Module Path]'" line.
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
 # Perl v5.8 is the minimum required for 'use autodie'
 use 5.008; use v5.8;
-# use lib '[Insert CPAN Module Path]'
-# TODO HTTP::Tiny
-use LWP::UserAgent;
+# use lib '[Insert CPAN Module Path]';
+use HTTP::Tiny;
 use JSON;
 use URI::Escape;
 use Config::Std;
@@ -15,20 +14,21 @@ use Config::Std;
 use autodie;
 # use Smart::Comments;
 
-my $VERSION = "0.2_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
-read_config '../etc/Personalization_API.conf' => my %config;
+read_config "../etc/Personalization_API.conf" => my %config;
 my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
 
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
 
-$ua = LWP::UserAgent->new;
+$ua = HTTP::Tiny->new;
 
+# TODO Transition from LWP::UserAgent to HTTP::Tiny
 # $ua->timeout(2);
-$ua->agent("RapleafApi/Perl/1.1");
+# $ua->agent("RapleafApi/Perl/1.1");
 
 my $maltego_selected_entity_value = $ARGV[0];
 
@@ -128,13 +128,13 @@ sub __get_json_response {
     # an HTTP response code other than 200 is sent back
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
-    $json_response->is_success
+    $json_response->{success}
       or die 'Error Code: '
-      . $json_response->status_line . "\n"
+      . $json_response->{status} . "\n"
       . 'Error Body: '
-      . $json_response;
+      . $json_response->{content};     
     $json = JSON->new->allow_nonref;
-    my $personalization = $json->decode( $json_response->content )->{answer};
+    my $personalization = $json->decode( $json_response->{content} )->{answer};
 }
 
 =head1 NAME
@@ -179,7 +179,7 @@ Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rap
 
 =head2 CPAN Modules
 
-LWP::UserAgent
+HTTP::Tiny
 JSON
 Config::Std
 Smart::Comments
