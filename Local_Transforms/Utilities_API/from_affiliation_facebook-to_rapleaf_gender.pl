@@ -3,6 +3,9 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# TODO Refactor "perl-maltego.pl" as a module
+do '../Perl-Maltego/perl-maltego.pl';
+
 # Perl v5.8 is the minimum required for 'use autodie'
 use 5.008; use v5.8;
 # use lib '[Insert CPAN Module Path]';
@@ -14,7 +17,7 @@ use Config::Std;
 use autodie;
 # use Smart::Comments;
 
-my $VERSION = "0.2_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -37,22 +40,11 @@ my $maltego_additional_field_values = $ARGV[1];
 # "###" is for Smart::Comments CPAN Module
 ### \$maltego_additional_field_values is: $maltego_additional_field_values;
 
-my @maltego_additional_field_values =
-  split( '#', $maltego_additional_field_values );
+my %maltego_additional_field_values =
+  split_maltego_additional_fields($maltego_additional_field_values);
 
 # TODO If UID field is empty, then extract UID from the "Profile URL" field
-my $affilation_facebook_name = $maltego_additional_field_values[0];
-
-# "###" is for Smart::Comments CPAN Module
-### \$affilation_facebook_name is: $affilation_facebook_name;
-
-$affilation_facebook_name =~ s/(person.name=)//g;
-
-# Remove single quotes
-$affilation_facebook_name =~ s/(\')//g;
-
-# Remove whitespace
-$affilation_facebook_name =~ s/^\s+|\s+$//g;
+my $affilation_facebook_name = $maltego_additional_field_values{"person.name"};
 
 # "###" is for Smart::Comments CPAN Module
 ### \$affilation_facebook_name is: $affilation_facebook_name;
@@ -192,7 +184,7 @@ https://github.com/cmlh/Maltego-Rapleaf/wiki/Overview-of-Rapleaf-APIs
 
 =head2 MALTEGO
 
-v3.2.1 "Radium"
+v3.3.0 "Radium" "Service Pack 2"
 
 =head1 OSNAMES
 
