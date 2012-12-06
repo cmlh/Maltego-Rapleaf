@@ -4,12 +4,16 @@
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
 # Perl v5.8 is the minimum required for 'use autodie'
-use 5.008; use v5.8;
+use 5.008;
+use v5.8;
+
 # use lib '[Insert CPAN Module Path]';
 use HTTP::Tiny;
 use JSON;
+
 # TODO use autodie qw(:all);
 use autodie;
+
 # use Smart::Comments;
 
 sub split_maltego_additional_fields {
@@ -22,9 +26,10 @@ sub split_maltego_additional_fields {
 
     foreach (@maltego_additional_field_values) {
         my ( $key, $value ) = split( /=/, $_, 2 );
+
         # "###" is for Smart::Comments CPAN Module
-		### \$key is: $key;
-		### \$value is: $value;
+        ### \$key is: $key;
+        ### \$value is: $value;
         $maltego_additional_field_values{"$key"} = "$value";
     }
 
