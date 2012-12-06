@@ -7,14 +7,18 @@
 do '../Perl-Maltego/perl-maltego.pl';
 
 # Perl v5.8 is the minimum required for 'use autodie'
-use 5.008; use v5.8;
+use 5.008;
+use v5.8;
+
 # use lib '[Insert CPAN Module Path]';
 use HTTP::Tiny;
 use JSON;
 use URI::Escape;
 use Config::Std;
+
 # TODO use autodie qw(:all);
 use autodie;
+
 # use Smart::Comments;
 
 my $VERSION = "0.2_2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
@@ -124,7 +128,7 @@ sub __get_json_response {
       or die 'Error Code: '
       . $json_response->{status} . "\n"
       . 'Error Body: '
-      . $json_response->{content};     
+      . $json_response->{content};
     $json = JSON->new->allow_nonref;
     my $personalization = $json->decode( $json_response->{content} )->{answer};
 }
