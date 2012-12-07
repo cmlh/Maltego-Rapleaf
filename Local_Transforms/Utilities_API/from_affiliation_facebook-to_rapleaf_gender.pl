@@ -31,6 +31,11 @@ my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
 
+my $http_status_200 = "OK";
+my $http_status_400 = "Bad Request";
+my $http_status_403 = "Forbidden";
+my $http_status_500 = "Internal Server Error";
+
 $ua = HTTP::Tiny->new;
 
 # TODO Transition from LWP::UserAgent to HTTP::Tiny
@@ -129,6 +134,10 @@ sub __get_json_response {
       . $json_response->{status} . "\n"
       . 'Error Body: '
       . $json_response->{content};
+    if ($json_response->{status} == 403) {
+    	print "Your query limit has been exceeded, or the API key is not associated with any available response section.\n";
+    	die();
+    }
     $json = JSON->new->allow_nonref;
     my $personalization = $json->decode( $json_response->{content} )->{answer};
 }
