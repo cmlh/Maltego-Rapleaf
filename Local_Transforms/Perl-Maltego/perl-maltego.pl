@@ -1,4 +1,4 @@
-#!/Users/cmlh/perl5/perlbrew/perls/perl-5.16.0/bin/perl
+#!/usr/bin/env perl
 # The above shebang is for "perlbrew", otherwise replace with "/usr/bin/perl" and update the "use lib '[Insert CPAN Module Path]'" line.
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
@@ -8,12 +8,9 @@ use 5.008;
 use v5.8;
 
 # use lib '[Insert CPAN Module Path]';
-use HTTP::Tiny;
-use JSON;
 
 # TODO use autodie qw(:all);
 use autodie;
-
 # use Smart::Comments;
 
 sub split_maltego_additional_fields {
