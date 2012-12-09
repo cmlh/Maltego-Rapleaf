@@ -4,7 +4,7 @@
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
 # TODO Refactor "perl-maltego.pl" as a module
-do '../Perl-Maltego/perl-maltego.pl';
+do '../Perl-Maltego/perl-maltego.pl' or die $@;
 
 # Perl v5.8 is the minimum required for 'use autodie'
 use 5.008;
@@ -75,17 +75,9 @@ my $response = query_by_name($affilation_facebook_first_name);
 ### \$response->{gender} is :$response->{gender}
 ### \$response->{likelihood} is :$response->{likelihood}
 
-# http://ctas.paterva.com/view/Specification#Message_Wrapper
-print("<MaltegoMessage>\n");
-print("<MaltegoTransformResponseMessage>\n");
-print("<UIMessages>\n");
-print(
-"		<UIMessage MessageType=\"Inform\">To Rapleaf Gender (Utilities API) - Local Transform v$VERSION</UIMessage>\n"
-);
+maltego_ui( "Inform",
+    "To Rapleaf Gender (Utilities API) - Local Transform v$VERSION" );
 
-# http://ctas.paterva.com/view/Specification#Entity_definition
-
-print("</UIMessages>\n");
 print("\t<Entities>\n");
 if ( $response->{gender} eq "Male" ) {
     print("\t\t<Entity Type=\"cmlh.rapleaf.gender.male\"><Value>%");
@@ -134,9 +126,10 @@ sub __get_json_response {
       . $json_response->{status} . "\n"
       . 'Error Body: '
       . $json_response->{content};
-    if ($json_response->{status} == 403) {
-    	print "Your query limit has been exceeded, or the API key is not associated with any available response section.\n";
-    	die();
+    if ( $json_response->{status} == 403 ) {
+        print
+"Your query limit has been exceeded, or the API key is not associated with any available response section.\n";
+        die();
     }
     $json = JSON->new->allow_nonref;
     my $personalization = $json->decode( $json_response->{content} )->{answer};
