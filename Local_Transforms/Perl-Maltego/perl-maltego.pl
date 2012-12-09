@@ -13,6 +13,21 @@ use v5.8;
 use autodie;
 # use Smart::Comments;
 
+# http://ctas.paterva.com/view/Specification#Message_Wrapper
+my $maltego_message_start_tag =	"<MaltegoMessage>\n";
+my $maltego_transform_response_message_start_tag ="\t<MaltegoTransformResponseMessage>\n";
+my $ui_messages_start_tag = "\t\t<UIMessages>\n";
+my $ui_messages_end_tag = "\t\t</UIMessages>\n";
+my $ui_message_type_inform_start_tag = "\t\t\t<UIMessage MessageType=\"Inform\">";
+# TODO Other UIMessage MessageType
+my $ui_message_end_tag = "</UIMessage>\n";
+# http://ctas.paterva.com/view/Specification#Entity_definition
+my $entities_start_tag = "\t\t<Entities>\n";
+# TODO <Entity Type><Value> and <AdditionalFields>
+my $entities_end_tag = "\t\t</Entities>\n";
+my $maltego_transform_response_message_end_tag = "\t</MaltegoTransformResponseMessage>";
+my $maltego_message_end_tag = "</MaltegoMessage>";
+
 sub split_maltego_additional_fields {
 
     my $maltego_additional_field_values = $_[0];
@@ -32,6 +47,29 @@ sub split_maltego_additional_fields {
 
     return %maltego_additional_field_values;
 }
+
+sub maltego_ui {
+	if (@_ < 2) {
+		#TODO print DEBUG "@_ is less than 2";
+		die();
+	}
+	my @uimessages = @_;
+	print "$maltego_message_start_tag";
+	print "$maltego_transform_response_message_start_tag";
+	print "$ui_messages_start_tag";
+	foreach my $uimessage (@uimessages) {
+		if ($uimessage eq "Inform") {
+			# TODO Check array element should be "odd" numbered;
+			print $ui_message_type_inform_start_tag;
+			next;
+		}
+		chomp $uimessage;
+		print $uimessage;
+		print $ui_message_end_tag;
+	}
+	print "$ui_messages_end_tag";
+}
+
 
 =head1 NAME
 
