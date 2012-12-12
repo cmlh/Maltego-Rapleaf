@@ -13,20 +13,24 @@ use v5.8;
 use autodie;
 # use Smart::Comments;
 
+my $VERSION = "0.1_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 my $maltego_message_start_tag =	"<MaltegoMessage>\n";
 my $maltego_transform_response_message_start_tag ="\t<MaltegoTransformResponseMessage>\n";
 my $ui_messages_start_tag = "\t\t<UIMessages>\n";
 my $ui_messages_end_tag = "\t\t</UIMessages>\n";
+my $ui_message_type_debug_start_tag = "\t\t\t<UIMessage MessageType=\"Debug\">";
 my $ui_message_type_inform_start_tag = "\t\t\t<UIMessage MessageType=\"Inform\">";
-# TODO Other UIMessage MessageType
+my $ui_message_type_partial_error_start_tag = "\t\t\t<UIMessage MessageType=\"PartialError\">";
+my $ui_message_type_fatal_error_start_tag = "\t\t\t<UIMessage MessageType=\"FatalError\">";
 my $ui_message_end_tag = "</UIMessage>\n";
 # http://ctas.paterva.com/view/Specification#Entity_definition
 my $entities_start_tag = "\t\t<Entities>\n";
 # TODO <Entity Type><Value> and <AdditionalFields>
 my $entities_end_tag = "\t\t</Entities>\n";
-my $maltego_transform_response_message_end_tag = "\t</MaltegoTransformResponseMessage>";
-my $maltego_message_end_tag = "</MaltegoMessage>";
+my $maltego_transform_response_message_end_tag = "\t</MaltegoTransformResponseMessage>\n";
+my $maltego_message_end_tag = "</MaltegoMessage>\n";
 
 sub split_maltego_additional_fields {
 
@@ -58,9 +62,15 @@ sub maltego_ui {
 	print "$maltego_transform_response_message_start_tag";
 	print "$ui_messages_start_tag";
 	foreach my $uimessage (@uimessages) {
+		# TODO Other UIMessage MessageType
 		if ($uimessage eq "Inform") {
 			# TODO Check array element should be "odd" numbered;
 			print $ui_message_type_inform_start_tag;
+			next;
+		}
+		if ($uimessage eq "Fatal Error") {
+			# TODO Check array element should be "odd" numbered;
+			print $ui_message_type_fatal_error_start_tag;
 			next;
 		}
 		chomp $uimessage;
@@ -68,6 +78,17 @@ sub maltego_ui {
 		print $ui_message_end_tag;
 	}
 	print "$ui_messages_end_tag";
+}
+
+sub maltego_error_no_entities_to_return {
+	print $entities_start_tag;
+	print $entities_end_tag;
+	maltego_message_end();
+}
+
+sub maltego_message_end {
+	print $maltego_transform_response_message_end_tag;
+	print $maltego_message_end_tag;
 }
 
 

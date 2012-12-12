@@ -21,7 +21,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_3"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -121,15 +121,16 @@ sub __get_json_response {
     # an HTTP response code other than 200 is sent back
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
-    $json_response->{success}
-      or die 'Error Code: '
-      . $json_response->{status} . "\n"
-      . 'Error Body: '
-      . $json_response->{content};
-    if ( $json_response->{status} == 403 ) {
-        print
-"Your query limit has been exceeded, or the API key is not associated with any available response section.\n";
-        die();
+    if ($json_response->{success} != "1") {
+    #  or die 'Error Code: '
+    #  . $json_response->{status} . "\n"
+    #  . 'Error Body: '
+    #  . $json_response->{content};
+    # if ( $json_response->{status} == 403 ) {
+        maltego_ui ("Fatal Error", "$json_response->{content}");
+        print STDERR "HTTP Status Code $json_response->{status}";
+        maltego_error_no_entities_to_return();
+        exit();
     }
     $json = JSON->new->allow_nonref;
     my $personalization = $json->decode( $json_response->{content} )->{answer};
