@@ -21,7 +21,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_3"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_4"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -87,11 +87,12 @@ if ( $response->{gender} eq "Male" ) {
 
 # TODO $response->{gender} is "unknown" i.e. https://www.rapleaf.com/developers/api_docs/utilities#name_to_gender
 
-else {
+if ( $response->{gender} eq "Female" ) {
     print("\t\t<Entity Type=\"cmlh.rapleaf.gender.female\"><Value>%");
     printf "%.0f", ( $response->{likelihood} * 100 );
     print("</Value>\n");
 }
+
 print("\t\t\t<AdditionalFields>\n");
 print("\t\t\t\t<Field Name=\"gender\">$response->{gender}</Field>\n");
 print("\t\t\t\t<Field Name=\"likelihood\">$response->{likelihood}</Field>\n");
