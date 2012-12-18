@@ -111,7 +111,8 @@ sub query_by_name {
     my $name = $_[0];
     my $url =
       "http://api.rapleaf.com/v4/util/name_to_gender/$name?api_key=$API_KEY";
-    print STDERR $url . "\n";
+    # "###" is for Smart::Comments CPAN Module
+	### \$url is: $url;
     __get_json_response($url);
 }
 
