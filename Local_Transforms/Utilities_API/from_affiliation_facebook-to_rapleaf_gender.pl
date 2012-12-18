@@ -21,7 +21,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_4"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_6"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -69,14 +69,16 @@ $affilation_facebook_first_name = uri_escape($affilation_facebook_first_name);
 # "###" is for Smart::Comments CPAN Module
 ### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
 
+@maltego_ui = ( "Inform",
+    "To Rapleaf Gender (Utilities API) - Local Transform v$VERSION" );
+    
 my $response = query_by_name($affilation_facebook_first_name);
 
 # "###" is for "Smart::Comments CPAN Module
 ### \$response->{gender} is :$response->{gender}
 ### \$response->{likelihood} is :$response->{likelihood}
 
-maltego_ui( "Inform",
-    "To Rapleaf Gender (Utilities API) - Local Transform v$VERSION" );
+maltego_ui(@maltego_ui);
 
 print("\t<Entities>\n");
 if ( $response->{gender} eq "Male" ) {
@@ -129,7 +131,8 @@ sub __get_json_response {
     #  . 'Error Body: '
     #  . $json_response->{content};
     # if ( $json_response->{status} == 403 ) {
-        maltego_ui ("Fatal Error", "$json_response->{content}");
+    	push (@maltego_ui, "Fatal Error", "$json_response->{content}");
+        maltego_ui(@maltego_ui);
         print STDERR "HTTP Status Code $json_response->{status}";
         maltego_error_no_entities_to_return();
         exit();
