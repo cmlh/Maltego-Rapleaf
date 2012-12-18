@@ -101,10 +101,8 @@ print("\t\t\t\t<Field Name=\"likelihood\">$response->{likelihood}</Field>\n");
 print("\t\t\t</AdditionalFields>\n");
 print("\t\t</Entity>\n");
 print("\t</Entities>\n");
-
-# http://ctas.paterva.com/view/Specification#Message_Wrapper
-print("</MaltegoTransformResponseMessage>\n");
-print("</MaltegoMessage>\n");
+ 
+maltego_message_end();
 
 sub query_by_name {
 
