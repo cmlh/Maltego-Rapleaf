@@ -69,9 +69,9 @@ $affilation_facebook_first_name = uri_escape($affilation_facebook_first_name);
 # "###" is for Smart::Comments CPAN Module
 ### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
 
-@maltego_ui = ( "Inform",
-    "To Rapleaf Gender (Utilities API) - Local Transform v$VERSION" );
-    
+@maltego_ui =
+  ( "Inform", "To Rapleaf Gender (Utilities API) - Local Transform v$VERSION" );
+
 my $response = query_by_name($affilation_facebook_first_name);
 
 # "###" is for "Smart::Comments CPAN Module
@@ -101,7 +101,7 @@ print("\t\t\t\t<Field Name=\"likelihood\">$response->{likelihood}</Field>\n");
 print("\t\t\t</AdditionalFields>\n");
 print("\t\t</Entity>\n");
 print("\t</Entities>\n");
- 
+
 maltego_message_end();
 
 sub query_by_name {
@@ -111,8 +111,9 @@ sub query_by_name {
     my $name = $_[0];
     my $url =
       "http://api.rapleaf.com/v4/util/name_to_gender/$name?api_key=$API_KEY";
+
     # "###" is for Smart::Comments CPAN Module
-	### \$url is: $url;
+    ### \$url is: $url;
     __get_json_response($url);
 }
 
@@ -123,13 +124,14 @@ sub __get_json_response {
     # an HTTP response code other than 200 is sent back
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
-    if ($json_response->{success} != "1") {
-    #  or die 'Error Code: '
-    #  . $json_response->{status} . "\n"
-    #  . 'Error Body: '
-    #  . $json_response->{content};
-    # if ( $json_response->{status} == 403 ) {
-    	push (@maltego_ui, "Fatal Error", "$json_response->{content}");
+    if ( $json_response->{success} != "1" ) {
+
+        #  or die 'Error Code: '
+        #  . $json_response->{status} . "\n"
+        #  . 'Error Body: '
+        #  . $json_response->{content};
+        # if ( $json_response->{status} == 403 ) {
+        push( @maltego_ui, "Fatal Error", "$json_response->{content}" );
         maltego_ui(@maltego_ui);
         print STDERR "HTTP Status Code $json_response->{status}";
         maltego_error_no_entities_to_return();
