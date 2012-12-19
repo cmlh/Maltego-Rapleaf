@@ -21,7 +21,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_6"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_7"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -36,13 +36,14 @@ my $http_status_400 = "Bad Request";
 my $http_status_403 = "Forbidden";
 my $http_status_500 = "Internal Server Error";
 
-$ua = HTTP::Tiny->new;
+$ua = HTTP::Tiny->new (
 
 # TODO Transition from LWP::UserAgent to HTTP::Tiny
 # "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
 # $ua->timeout(2);
 # "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
-# $ua->agent("RapleafApi/Perl/1.1");
+agent => "RapleafApi/Perl/1.1"
+);
 
 my $maltego_selected_entity_value = $ARGV[0];
 
