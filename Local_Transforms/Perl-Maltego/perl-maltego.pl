@@ -10,6 +10,7 @@ use v5.8.1;
 
 # use lib '[Insert CPAN Module Path]';
 
+use warnings FATAL;
 use utf8;
 
 # TODO use autodie qw(:all);

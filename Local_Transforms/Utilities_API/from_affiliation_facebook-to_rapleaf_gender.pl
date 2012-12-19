@@ -13,6 +13,7 @@ use v5.8.1;
 
 # use lib '[Insert CPAN Module Path]';
 
+use warnings FATAL;
 use utf8;
 
 use HTTP::Tiny;     # HTTP::Tiny v0.024
