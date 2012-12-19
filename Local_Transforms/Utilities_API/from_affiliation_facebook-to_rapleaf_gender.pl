@@ -12,16 +12,16 @@ use v5.8;
 
 # use lib '[Insert CPAN Module Path]';
 use HTTP::Tiny; # HTTP::Tiny v0.024
-use JSON;
-use URI::Escape;
-use Config::Std;
+use JSON; # JSON v2.53
+use URI::Escape; # URI::Escape v3.31
+use Config::Std; # Config::Std v0.900
 
 # TODO use autodie qw(:all);
 use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_7"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_8"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -31,6 +31,7 @@ my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
 
+# https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
 my $http_status_200 = "OK";
 my $http_status_400 = "Bad Request";
 my $http_status_403 = "Forbidden";
@@ -128,12 +129,7 @@ sub __get_json_response {
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
     if ( $json_response->{success} != "1" ) {
-
-        #  or die 'Error Code: '
-        #  . $json_response->{status} . "\n"
-        #  . 'Error Body: '
-        #  . $json_response->{content};
-        # if ( $json_response->{status} == 403 ) {
+		# TODO Leverage other Maltego UI Messages, such as "Partial Error" depending on the HTTP Status Code returned by Rapleaf i.e. https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
         push( @maltego_ui, "Fatal Error", "$json_response->{content}" );
         maltego_ui(@maltego_ui);
         print STDERR "HTTP Status Code $json_response->{status}";
