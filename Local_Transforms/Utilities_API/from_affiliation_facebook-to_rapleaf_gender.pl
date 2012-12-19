@@ -11,10 +11,10 @@ use 5.008;
 use v5.8;
 
 # use lib '[Insert CPAN Module Path]';
-use HTTP::Tiny; # HTTP::Tiny v0.024
-use JSON; # JSON v2.53
-use URI::Escape; # URI::Escape v3.31
-use Config::Std; # Config::Std v0.900
+use HTTP::Tiny;     # HTTP::Tiny v0.024
+use JSON;           # JSON v2.53
+use URI::Escape;    # URI::Escape v3.31
+use Config::Std;    # Config::Std v0.900
 
 # TODO use autodie qw(:all);
 use autodie;
@@ -37,13 +37,14 @@ my $http_status_400 = "Bad Request";
 my $http_status_403 = "Forbidden";
 my $http_status_500 = "Internal Server Error";
 
-$ua = HTTP::Tiny->new (
+$ua = HTTP::Tiny->new(
 
-# TODO Transition from LWP::UserAgent to HTTP::Tiny
-# "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
-timeout => "2",
-# "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
-agent => "RapleafApi/Perl/1.1"
+    # TODO Transition from LWP::UserAgent to HTTP::Tiny
+    # "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
+    timeout => "2",
+
+    # "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
+    agent => "RapleafApi/Perl/1.1"
 );
 
 my $maltego_selected_entity_value = $ARGV[0];
@@ -129,7 +130,10 @@ sub __get_json_response {
     # The error code and error body are put in the exception's message
     my $json_response = $ua->get( $_[0] );
     if ( $json_response->{success} != "1" ) {
-		# TODO Leverage other Maltego UI Messages, such as "Partial Error" depending on the HTTP Status Code returned by Rapleaf i.e. https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
+
+		# TODO Leverage other Maltego UI Messages, such as "Partial Error"
+		# depending on the HTTP Status Code returned by Rapleaf i.e.
+		# https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
         push( @maltego_ui, "Fatal Error", "$json_response->{content}" );
         maltego_ui(@maltego_ui);
         print STDERR "HTTP Status Code $json_response->{status}";
