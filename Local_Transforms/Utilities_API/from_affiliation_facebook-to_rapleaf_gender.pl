@@ -11,7 +11,7 @@ use 5.008;
 use v5.8;
 
 # use lib '[Insert CPAN Module Path]';
-use HTTP::Tiny;
+use HTTP::Tiny; # HTTP::Tiny v0.024
 use JSON;
 use URI::Escape;
 use Config::Std;
@@ -39,7 +39,9 @@ my $http_status_500 = "Internal Server Error";
 $ua = HTTP::Tiny->new;
 
 # TODO Transition from LWP::UserAgent to HTTP::Tiny
+# "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
 # $ua->timeout(2);
+# "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
 # $ua->agent("RapleafApi/Perl/1.1");
 
 my $maltego_selected_entity_value = $ARGV[0];
