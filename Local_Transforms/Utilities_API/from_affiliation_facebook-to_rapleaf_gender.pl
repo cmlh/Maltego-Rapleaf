@@ -40,7 +40,7 @@ $ua = HTTP::Tiny->new (
 
 # TODO Transition from LWP::UserAgent to HTTP::Tiny
 # "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
-# $ua->timeout(2);
+timeout => "2",
 # "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
 agent => "RapleafApi/Perl/1.1"
 );
