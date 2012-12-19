@@ -6,9 +6,12 @@
 # TODO Refactor "perl-maltego.pl" as a module
 do '../Perl-Maltego/perl-maltego.pl' or die $@;
 
-# Perl v5.8 is the minimum required for 'use autodie'
-use 5.008;
-use v5.8;
+# Perl v5.8 is the minimum version required for 'use autodie'
+# Perl v5.8.1 is the minimum version required for 'use utf8'
+use 5.0080001;
+use v5.8.1;
+
+use utf8;
 
 # use lib '[Insert CPAN Module Path]';
 use HTTP::Tiny;     # HTTP::Tiny v0.024
@@ -21,7 +24,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_8"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_10"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
