@@ -11,9 +11,10 @@ do '../Perl-Maltego/perl-maltego.pl' or die $@;
 use 5.0080001;
 use v5.8.1;
 
+# use lib '[Insert CPAN Module Path]';
+
 use utf8;
 
-# use lib '[Insert CPAN Module Path]';
 use HTTP::Tiny;     # HTTP::Tiny v0.024
 use JSON;           # JSON v2.53
 use URI::Escape;    # URI::Escape v3.31
