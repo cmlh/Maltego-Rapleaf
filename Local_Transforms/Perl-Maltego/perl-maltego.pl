@@ -11,13 +11,15 @@ use v5.8.1;
 # use lib '[Insert CPAN Module Path]';
 
 use warnings FATAL;
+use diagnostics;
+
 use utf8;
 
 # TODO use autodie qw(:all);
 use autodie;
 # use Smart::Comments;
 
-my $VERSION = "0.1_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.1_2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 my $maltego_message_start_tag =	"<MaltegoMessage>\n";

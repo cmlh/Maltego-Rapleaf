@@ -14,6 +14,8 @@ use v5.8.1;
 # use lib '[Insert CPAN Module Path]';
 
 use warnings FATAL;
+use diagnostics;
+
 use utf8;
 
 use HTTP::Tiny;     # HTTP::Tiny v0.024
@@ -26,7 +28,7 @@ use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_10"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_11"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
