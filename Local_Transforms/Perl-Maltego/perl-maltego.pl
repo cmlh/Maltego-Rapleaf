@@ -3,18 +3,24 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
-# Perl v5.8 is the minimum required for 'use autodie'
-use 5.008;
-use v5.8;
+# Perl v5.8 is the minimum version required for 'use autodie'
+# Perl v5.8.1 is the minimum version required for 'use utf8'
+use 5.0080001;
+use v5.8.1;
 
 # use lib '[Insert CPAN Module Path]';
+
+use warnings FATAL;
+use diagnostics;
+
+use utf8;
 
 # TODO use autodie qw(:all);
 use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.1_0"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.1_2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # http://ctas.paterva.com/view/Specification#Message_Wrapper
 my $maltego_message_start_tag = "<MaltegoMessage>\n";
