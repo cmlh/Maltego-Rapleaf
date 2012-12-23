@@ -6,9 +6,9 @@ use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
-use Smart::Comments;
+# use Smart::Comments;
 
-my $VERSION = "0.0.2"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.0.3"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
@@ -24,6 +24,9 @@ $ua = LWP::UserAgent->new;
 $ua->agent("RapleafApi/Perl/1.1");
 
 my $maltego_selected_entity_value = $ARGV[0];
+
+# "###" is for Smart::Comments CPAN Module
+### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
 
 my $maltego_additional_field_values = $ARGV[1];
 
