@@ -56,6 +56,9 @@ $ua = HTTP::Tiny->new(
 
 my $maltego_selected_entity_value = $ARGV[0];
 
+# "###" is for Smart::Comments CPAN Module
+### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
+
 my $maltego_additional_field_values = $ARGV[1];
 
 # "###" is for Smart::Comments CPAN Module
