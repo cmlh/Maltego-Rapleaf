@@ -8,12 +8,12 @@ use URI::Escape;
 use Config::Std;
 # use Smart::Comments;
 
-my $VERSION = "0.0.3"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.3_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
 read_config "../etc/Rapleaf_API.conf" => my %config;
-my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
+my $API_KEY = $config{'RapleafAPI'}{'api_key'};
 
 # "###" is for "Smart::Comments CPAN Module
 ### \$API_KEY is :$API_KEY
@@ -139,6 +139,8 @@ Please refer to https://github.com/cmlh/Maltego-Rapleaf/README.pod
 Based on the "Apache License 2.0" Perl Code listed at https://raw.github.com/Rapleaf/Personalization-Dev-Kits/master/perl/RapleafApi.pl
 
 =head1 DEPENDENCIES
+
+LWP::Protocol::https
 
 =head1 PREREQUISITES
 
