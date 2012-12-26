@@ -3,46 +3,69 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# perltidy: 20121226
+# ci - cmd_line: 20121226
+
 # TODO Refactor "perl-maltego.pl" as a module
 do '../Perl-Maltego/perl-maltego.pl' or die $@;
 
-# Perl v5.8 is the minimum required for 'use autodie'
-use 5.008;
-use v5.8;
+# Perl v5.8 is the minimum version required for 'use autodie'
+# Perl v5.8.1 is the minimum version required for 'use utf8'
+use 5.0080001;
+use v5.8.1;
 
 # use lib '[Insert CPAN Module Path]';
-use HTTP::Tiny;
-use JSON;
-use URI::Escape;
-use Config::Std;
+
+use warnings FATAL;
+use diagnostics;
+
+use utf8;
+
+use HTTP::Tiny;     # HTTP::Tiny v0.024
+use JSON;           # JSON v2.53
+use URI::Escape;    # URI::Escape v3.31
+use Config::Std;    # Config::Std v0.900
 
 # TODO use autodie qw(:all);
 use autodie;
 
 # use Smart::Comments;
 
-my $VERSION = "0.2_6"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+my $VERSION = "0.2_13"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
-read_config "../etc/Personalization_API.conf" => my %config;
-my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
+read_config "../etc/Rapleaf_API.conf" => my %config;
+my $API_KEY = $config{'RapleafAPI'}{'api_key'};
 
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
 
+# https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
 my $http_status_200 = "OK";
 my $http_status_400 = "Bad Request";
 my $http_status_403 = "Forbidden";
 my $http_status_500 = "Internal Server Error";
 
-$ua = HTTP::Tiny->new;
+$ua = HTTP::Tiny->new(
 
-# TODO Transition from LWP::UserAgent to HTTP::Tiny
-# $ua->timeout(2);
-# $ua->agent("RapleafApi/Perl/1.1");
+    # TODO Transition from LWP::UserAgent to HTTP::Tiny
+    # "timeout" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
+    timeout => "2",
+
+    # "agent" attribute of https://metacpan.org/module/HTTP%3a%3aTiny#new
+    agent => "RapleafApi/Perl/1.1"
+);
 
 my $maltego_selected_entity_value = $ARGV[0];
+
+# "###" is for Smart::Comments CPAN Module
+### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
+
+$maltego_selected_entity_value = trim($maltego_selected_entity_value);
+
+# "###" is for Smart::Comments CPAN Module
+### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
 
 my $maltego_additional_field_values = $ARGV[1];
 
@@ -54,6 +77,11 @@ my %maltego_additional_field_values =
 
 # TODO If UID field is empty, then extract UID from the "Profile URL" field
 my $affilation_facebook_name = $maltego_additional_field_values{"person.name"};
+
+# "###" is for Smart::Comments CPAN Module
+### \$affilation_facebook_name is: $affilation_facebook_name;
+
+$affilation_facebook_name = trim($affilation_facebook_name);
 
 # "###" is for Smart::Comments CPAN Module
 ### \$affilation_facebook_name is: $affilation_facebook_name;
@@ -126,11 +154,9 @@ sub __get_json_response {
     my $json_response = $ua->get( $_[0] );
     if ( $json_response->{success} != "1" ) {
 
-        #  or die 'Error Code: '
-        #  . $json_response->{status} . "\n"
-        #  . 'Error Body: '
-        #  . $json_response->{content};
-        # if ( $json_response->{status} == 403 ) {
+		# TODO Leverage other Maltego UI Messages, such as "Partial Error"
+		# depending on the HTTP Status Code returned by Rapleaf i.e.
+		# https://www.rapleaf.com/developers/utilities-api/utilities-api-documentation/#responses
         push( @maltego_ui, "Fatal Error", "$json_response->{content}" );
         maltego_ui(@maltego_ui);
         print STDERR "HTTP Status Code $json_response->{status}";

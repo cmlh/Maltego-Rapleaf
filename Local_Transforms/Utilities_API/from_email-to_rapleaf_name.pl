@@ -2,18 +2,22 @@
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
+# perltidy: 20121226
+# ci - cmd_line: 20121226
+
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
-use Smart::Comments;
 
-my $VERSION = "0.0.1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+# use Smart::Comments;
+
+my $VERSION = "0.3_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
-read_config './etc/Personalization_API.conf' => my %config;
-my $API_KEY = $config{'PersonalizationAPI'}{'api_key'};
+read_config "../etc/Rapleaf_API.conf" => my %config;
+my $API_KEY = $config{'RapleafAPI'}{'api_key'};
 
 # "###" is for Smart::Comments CPAN Module
 ### \$API_KEY is: $API_KEY;
@@ -24,6 +28,9 @@ $ua = LWP::UserAgent->new;
 $ua->agent("RapleafApi/Perl/1.1");
 
 my $maltego_selected_entity_value = $ARGV[0];
+
+# "###" is for Smart::Comments CPAN Module
+### \$maltego_selected_entity_value is: $maltego_selected_entity_value;
 
 my $maltego_additional_field_values = $ARGV[1];
 
@@ -57,7 +64,9 @@ print(
 
 print("</UIMessages>\n");
 print("\t<Entities>\n");
-print("\t\t<Entity Type=\"maltego.Person\"><Value>$response->{first} $response->{last}</Value>\n");
+print(
+"\t\t<Entity Type=\"maltego.Person\"><Value>$response->{first} $response->{last}</Value>\n"
+);
 print("\t\t\t<AdditionalFields>\n");
 print("\t\t\t\t<Field Name=\"person.firstnames\">$response->{first}</Field>\n");
 print("\t\t\t\t<Field Name=\"person.lastname\">$response->{last}</Field>\n");
@@ -93,7 +102,8 @@ sub __get_json_response {
       . 'Error Body: '
       . $json_response;
     $json = JSON->new->allow_nonref;
-    my $personalization = $json->decode( $json_response->content )->{answer}->{name};
+    my $personalization =
+      $json->decode( $json_response->content )->{answer}->{name};
 }
 
 =head1 NAME
