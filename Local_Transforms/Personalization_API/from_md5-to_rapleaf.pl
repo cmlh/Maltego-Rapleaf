@@ -2,10 +2,13 @@
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
+# perltidy: 20121226
+
 use LWP::UserAgent;
 use JSON;
 use URI::Escape;
 use Config::Std;
+
 # use Smart::Comments;
 
 my $VERSION = "0.3_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
@@ -77,12 +80,13 @@ sub query_by_md5 {
     # and returns a hash which maps attribute fields onto attributes
     my $md5_email = $_[0];
     my $url =
-        'https://personalize.rapleaf.com/v4/dr?api_key=' 
+        'https://personalize.rapleaf.com/v4/dr?api_key='
       . $API_KEY
       . '&md5_email='
       . uri_escape($md5_email);
+
     # "###" is for "Smart::Comments CPAN Module
-	### \$url is :$url
+    ### \$url is :$url
     __get_json_response($url);
 }
 

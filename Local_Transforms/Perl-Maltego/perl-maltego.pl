@@ -3,6 +3,8 @@
 #
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
+# perltidy: 20121226
+
 # Perl v5.8 is the minimum version required for 'use autodie'
 # Perl v5.8.1 is the minimum version required for 'use utf8'
 use 5.0080001;
@@ -49,19 +51,19 @@ my $maltego_message_end_tag = "</MaltegoMessage>\n";
 # sub trim() forked from http://my.safaribooksonline.com/book/programming/perl/1565922433/strings/ch01-34997
 sub trim {
     my @trimmed = @_;
-    my $count = 0;
     foreach (@trimmed) {
         s/^\s+//;
         s/\s+$//;
         my $trimmed = $_;
-		# "###" is for Smart::Comments CPAN Module
-		### \$trimmed is: $trimmed;
+
+        # "###" is for Smart::Comments CPAN Module
+        ### \$trimmed is: $trimmed;
     }
     return wantarray ? @trimmed : $trimmed[0];
 }
 
 sub split_maltego_additional_fields {
-	
+
     my $maltego_additional_field_values = $_[0];
     my @maltego_additional_field_values =
       split( '#', $maltego_additional_field_values );
@@ -75,6 +77,7 @@ sub split_maltego_additional_fields {
         ### \$key is: $key;
         ### \$value is: $value;
         $maltego_additional_field_values{"$key"} = "$value";
+
         # TODO perl-maltego.pl sub trim()
     }
 

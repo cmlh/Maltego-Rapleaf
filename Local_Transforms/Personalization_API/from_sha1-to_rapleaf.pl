@@ -2,11 +2,14 @@
 #
 # Forked from https://github.com/Rapleaf/Personalization-Dev-Kits/blob/master/perl/RapleafApi.pl
 
+# perltidy: 20121226
+
 use LWP::UserAgent;
 use JSON;
 use Digest::SHA1;
 use URI::Escape;
 use Config::Std;
+
 # use Smart::Comments;
 
 my $VERSION = "0.3_1"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
@@ -75,7 +78,7 @@ sub query_by_sha1 {
     # and returns a hash which maps attribute fields onto attributes
     my $sha1_email = $_[0];
     my $url =
-        'https://personalize.rapleaf.com/v4/dr?api_key=' 
+        'https://personalize.rapleaf.com/v4/dr?api_key='
       . $API_KEY
       . '&sha1_email='
       . uri_escape($sha1_email);
