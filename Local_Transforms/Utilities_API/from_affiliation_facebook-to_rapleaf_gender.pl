@@ -4,6 +4,7 @@
 # Please refer to the Plain Old Documentation (POD) at the end of this Perl Script for further information
 
 # perltidy: 20121226
+# ci - cmd_line: 20121226
 
 # TODO Refactor "perl-maltego.pl" as a module
 do '../Perl-Maltego/perl-maltego.pl' or die $@;
