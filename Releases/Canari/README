@@ -1,0 +1,24 @@
+I've attached two tar balls. One is of a development snapshot of Canari that includes foreign lang support, and the second is your rapleaf repo in Canari package format. To get it going is pretty straightforward:
+
+perl -MCPAN -eshell
+install Config::IniFiles
+exit
+
+tar -zxvf canari-0.4.tar.gz
+cd canari-0.4
+python setup.py install
+
+cd ..
+tar -zxvf rapleaf-poc-canari.tar.gz
+cd rapleaf/
+python setup.py install
+canari install-package rapleaf
+
+Et voila! Your transforms should now appear in Maltego and run with Canari dispatcher. I did do some minor changes to your code. First, I changed the config parser to Config::IniFiles to be compatible with Canari format. Second I changed the config file to match INI config option format (i.e. option=value). A few places you'd like to look at:
+
+Under rapleaf/src/rapleaf/:
+
+resources/external -> this is where all your perl scripts are
+resources/maltego -> this is where your entities file is and where you can place machine scripts
+transforms/__init__.py -> this is the transform registry
+transforms/md5torapleaf.py -> this is a sample transform with perl support. Note the 'cmd' keyword in the @configure annotation of the dotransform function
