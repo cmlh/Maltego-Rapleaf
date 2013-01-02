@@ -15,7 +15,7 @@ use 5.0080001;
 use v5.8.1;
 
 # use lib '[Insert CPAN Module Path]';
-
+# ISSUE use strict;
 use warnings FATAL;
 use diagnostics;
 
