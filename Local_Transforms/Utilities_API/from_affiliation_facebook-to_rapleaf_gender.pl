@@ -6,32 +6,36 @@
 # perltidy: 20121226
 # ci - cmd_line: 20121226
 
-# TODO Refactor "perl-maltego.pl" as a module
-do '../Perl-Maltego/perl-maltego.pl' or die $@;
-
 # Perl v5.8 is the minimum version required for 'use autodie'
 # Perl v5.8.1 is the minimum version required for 'use utf8'
 use 5.0080001;
 use v5.8.1;
+
+use utf8;
 
 # use lib '[Insert CPAN Module Path]';
 # ISSUE use strict;
 use warnings FATAL;
 use diagnostics;
 
-use utf8;
+# TODO use autodie qw(:all);
+use autodie;
+
+
 
 use HTTP::Tiny;     # HTTP::Tiny v0.024
 use JSON;           # JSON v2.53
 use URI::Escape;    # URI::Escape v3.31
 use Config::Std;    # Config::Std v0.900
 
-# TODO use autodie qw(:all);
-use autodie;
+
 
 # use Smart::Comments;
 
 my $VERSION = "0.2_13"; # May be required to upload script to CPAN i.e. http://www.cpan.org/scripts/submitting.html
+
+# TODO Refactor "perl-maltego.pl" as a module
+do '../Perl-Maltego/perl-maltego.pl' or die $@;
 
 # CONFIGURATION
 # REFACTOR with "easydialogs" e.g. http://www.paterva.com/forum//index.php/topic,134.0.html as recommended by Andrew from Paterva
